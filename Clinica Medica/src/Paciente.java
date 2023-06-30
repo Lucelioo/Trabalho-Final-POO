@@ -1,8 +1,8 @@
 public class Paciente extends Pessoa {
     private String convenio;
 
-    public Paciente(String nome, int idade, int cpf, int rg, String endereco, int telefone, char sexo, String convenio) {
-        super(nome, idade, cpf, rg, endereco, telefone, sexo);
+    public Paciente(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo, String convenio) {
+        super(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo);
         this.convenio = convenio;
     }
 

@@ -20,7 +20,7 @@ public class Calendario {
         }
 
         if (!agenda.get(dia)) {
-            throw new HorarioOcupadoException("O horário já está ocupado.");
+            throw new HorarioOcupadoException("O horario ja esta ocupado.");
         }
 
         String horario = paciente.getNome() + " - " + paciente.getCpf();

@@ -1,8 +1,8 @@
 public class Funcionario extends Pessoa {
     private int matricula;
 
-    public Funcionario(String nome, int idade, int cpf, int rg, String endereco, int telefone, char sexo, int matricula) {
-        super(nome, idade, cpf, rg, endereco, telefone, sexo);
+    public Funcionario(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo, int matricula) {
+        super(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo);
         this.matricula = matricula;
     }
 
@@ -11,6 +11,9 @@ public class Funcionario extends Pessoa {
     }
 
     public void setMatricula(int matricula) {
-        this.matricula = matricula;
+        String matriculaStr = String.valueOf(matricula);
+        if (matriculaStr.length() == 6) {
+            this.matricula = matricula;
+        }
     }
 }

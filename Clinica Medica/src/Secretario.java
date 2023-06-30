@@ -1,8 +1,8 @@
 public class Secretario extends Funcionario {
     private double salario;
 
-    public Secretario(String nome, int idade, int cpf, int rg, String endereco, int telefone, char sexo,int matricula, double salario) {
-        super(nome, idade, cpf, rg, endereco, telefone, sexo, matricula);
+    public Secretario(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo,int matricula, double salario) {
+        super(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula);
         this.salario = salario;
     }
 
@@ -11,6 +11,10 @@ public class Secretario extends Funcionario {
     }
 
     public void setSalario(double salario) {
-        this.salario = salario;
+        if (salario >= 0.0) {
+            this.salario = salario;
+        } else {
+            this.salario = 0;
+        }
     }
 }

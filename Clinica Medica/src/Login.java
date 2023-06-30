@@ -16,7 +16,7 @@ public class Login {
                 return;
             }
         }
-        System.out.println("Nome e/ou matrícula inválidos");
+        System.out.println("Nome e/ou matricula invalidos");
     }
 
     public void fazerLoginSecretario(ArrayList<Secretario> secretarios) {
@@ -26,7 +26,7 @@ public class Login {
                 return;
             }
         }
-        System.out.println("Nome e/ou matrícula inválidos");
+        System.out.println("Nome e/ou matricula invalidos");
     }
 
     public void fazerLoginAdministrador(ArrayList<Administrador> administradores) {
@@ -36,6 +36,6 @@ public class Login {
                 return;
             }
         }
-        System.out.println("Nome e/ou matrícula inválidos");
+        System.out.println("Nome e/ou matricula inválidos");
     }
 }

@@ -3,8 +3,8 @@ public class Medico extends Funcionario {
     private double salario;
     private String crm;
 
-    public Medico(String nome, int idade, int cpf, int rg, String endereco, int telefone, char sexo, int matricula, String especialidade, double salario, String crm) {
-        super(nome, idade, cpf, rg, endereco, telefone, sexo, matricula);
+    public Medico(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo, int matricula, String especialidade, double salario, String crm) {
+        super(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula);
         this.especialidade = especialidade;
         this.salario = salario;
         this.crm = crm;
@@ -15,7 +15,12 @@ public class Medico extends Funcionario {
     }
 
     public void setEspecialidade(String especialidade) {
-        this.especialidade = especialidade;
+        if (especialidade != null && !especialidade.isEmpty()) {
+            this.especialidade = especialidade;
+        }
+        else{
+            this.especialidade = null;
+        }
     }
 
     public double getSalario() {
@@ -23,7 +28,11 @@ public class Medico extends Funcionario {
     }
 
     public void setSalario(double salario) {
-        this.salario = salario;
+        if (salario >= 0.0) {
+            this.salario = salario;
+        } else {
+            this.salario = 0;
+        }
     }
 
     public String getCrm() {
@@ -31,6 +40,13 @@ public class Medico extends Funcionario {
     }
 
     public void setCrm(String crm) {
-        this.crm = crm;
+
+        String regex = "^CRM/[A-Z]{2} \\d{6}$";
+
+        if (crm.matches(regex)) {
+            this.crm = crm;
+        } else {
+            this.crm = null;
+        }
     }
 }
