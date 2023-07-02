@@ -1,8 +1,14 @@
 import java.util.Scanner;
 
 public class Main {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
+        //Administrador administrador = new Administrador("Otaviano", "31/07/1990", 31, "03969237394", "2002030061587", "Rua A", "88992784105", 'M', 411631, "Engenheiro");
+        
+
         Login login;
 
         Scanner scanner = new Scanner(System.in);
@@ -78,7 +84,7 @@ public class Main {
     }
 
     public static void clearConsole() {
-    System.out.print("\033[H\033[2J");
-    System.out.flush();
-}
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }

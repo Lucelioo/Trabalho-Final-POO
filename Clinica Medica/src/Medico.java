@@ -41,9 +41,7 @@ public class Medico extends Funcionario {
 
     public void setCrm(String crm) {
 
-        String regex = "^CRM/[A-Z]{2} \\d{6}$";
-
-        if (crm.matches(regex)) {
+        if (crm != null && !crm.isEmpty()) {
             this.crm = crm;
         } else {
             this.crm = null;
