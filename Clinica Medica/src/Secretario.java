@@ -1,4 +1,6 @@
-public class Secretario extends Funcionario {
+import java.io.Serializable;
+
+public class Secretario extends Funcionario implements Serializable{
     private double salario;
     
     public Secretario() {

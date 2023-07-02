@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Scanner;
 
 public class Main {
@@ -6,7 +7,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
-        
+        cadastro = carregarListas();
+
         Login login;
 
         Scanner scanner = new Scanner(System.in);
@@ -39,12 +41,13 @@ public class Main {
                         while (retorno4.equals("Nome invalido!") || retorno4.equals("Matricula invalida!")) {
                             clearConsole();
                             System.out.println(retorno4);
-                            System.out.println("\n1. Deseja Fazer login novamente?");
+                            System.out.println("\n1. Deseja tentar fazer login novamente?");
                             System.out.println("0. Sair");
                             System.out.print("\nDigite a opcao desejada: ");
                             String opcao4 = scanner.nextLine();
 
                             if(!opcao4.equals("0")){
+                                clearConsole();
                                 login = fazerLogin(scanner);
                                 retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
                             }
@@ -59,8 +62,16 @@ public class Main {
                         while (retorno5.equals("Nome invalido!") || retorno5.equals("Matricula invalida!")) {
                             clearConsole();
                             System.out.println(retorno5);
-                            login = fazerLogin(scanner);
-                            retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
+                            System.out.println("\n1. Deseja tentar fazer login novamente?");
+                            System.out.println("0. Sair");
+                            System.out.print("\nDigite a opcao desejada: ");
+                            String opcao5 = scanner.nextLine();
+
+                            if(!opcao5.equals("0")){
+                                clearConsole();
+                                login = fazerLogin(scanner);
+                                retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
+                            }
                         }
                         System.out.println("Login realizado com sucesso\n");
                         break;
@@ -71,8 +82,17 @@ public class Main {
                         while (retorno6.equals("Nome invalido!") || retorno6.equals("Matricula invalida!")) {
                             clearConsole();
                             System.out.println(retorno6);
-                            login = fazerLogin(scanner);
-                            retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
+                            System.out.println("\n1. Deseja tentar fazer login novamente?");
+                            System.out.println("0. Sair");
+                            System.out.print("\nDigite a opcao desejada: ");
+                            String opcao5 = scanner.nextLine();
+
+                            if(!opcao5.equals("0")){
+                                clearConsole();
+                                login = fazerLogin(scanner);
+                                retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
+                            }
+                           
                         }
                         System.out.println("Login realizado com sucesso\n");
                         break;
@@ -89,8 +109,8 @@ public class Main {
            //base para calendario
     Calendario calendario = new Calendario();
 
-        Medico medico = new Medico("Dr. João", "01/01/1980", 40, "12345678901",
-                "1234567", "Rua A, 123", "123456789", 'M', 12345, "Cardiologia", 5000.0, "CRM12345");
+        Medico medico = new Medico("Dr. Joao", "01/01/1980", 40, "12345678901",
+                "1234567", "Rua A, 123", "85981234532", 'M', 12345, "Cardiologia", 5000.0, "CRM12345");
 
         Paciente paciente = new Paciente("Maria", "02/02/1990", 30, "98765432109",
                 "7654321", "Rua B, 456", "987654321", 'F', "ConvenioX");
@@ -104,6 +124,8 @@ public class Main {
         }
 
         calendario.imprimirAgendamentosDoDia("01/07/2023");
+
+        salvarListas(cadastro);
     }
 
     private static void exibirMenu() {
@@ -133,5 +155,31 @@ public class Main {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-      
+    
+    
+    private static void salvarListas(Cadastro cadastro) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("cadastro.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(cadastro);
+            objectOut.close();
+            System.out.println("Dados salvo com sucesso.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Cadastro carregarListas() {
+        try {
+            FileInputStream fileIn = new FileInputStream("cadastro.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            Cadastro cadastro = (Cadastro) objectIn.readObject();
+            objectIn.close();
+            return cadastro;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

@@ -1,4 +1,5 @@
-public class Medico extends Funcionario{
+import java.io.Serializable;
+public class Medico extends Funcionario implements Serializable {
     private String especialidade;
     private double salario;
     private String crm;

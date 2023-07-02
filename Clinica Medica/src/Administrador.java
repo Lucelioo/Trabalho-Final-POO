@@ -1,4 +1,5 @@
-public class Administrador extends Funcionario{
+import java.io.Serializable;
+public class Administrador extends Funcionario implements Serializable{
     private String funcao;
 
     public Administrador() {

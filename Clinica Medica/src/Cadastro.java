@@ -1,8 +1,8 @@
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cadastro {
+public class Cadastro implements Serializable {
     private ArrayList<Medico> listaMedicos;
     private ArrayList<Secretario> listaSecretarios;
     private ArrayList<Administrador> listaAdministradores;
