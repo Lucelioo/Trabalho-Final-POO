@@ -13,145 +13,181 @@ public class Cadastro {
     }
 
     public void cadastrarMedico() {
-    Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
 
-    System.out.println("Cadastro de Medico");
-    System.out.print("Nome: ");
-    String nome = scanner.nextLine();
+        do {
+            System.out.println("\n===== Sistema de Cadastro de Medico =====");
+            System.out.println("\nDados do Medico");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
 
-    System.out.print("Data de Nascimento: ");
-    String dataNascimento = scanner.nextLine();
+            System.out.print("Data de Nascimento: ");
+            String dataNascimento = scanner.nextLine();
 
-    System.out.print("Idade: ");
-    int idade = scanner.nextInt();
-    scanner.nextLine(); 
+            System.out.print("Idade: ");
+            int idade = scanner.nextInt();
+            scanner.nextLine(); 
 
-    System.out.print("CPF: ");
-    String cpf = scanner.nextLine();
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
 
-    System.out.print("RG: ");
-    String rg = scanner.nextLine();
+            System.out.print("RG: ");
+            String rg = scanner.nextLine();
 
-    System.out.print("Endereco: ");
-    String endereco = scanner.nextLine();
+            System.out.print("Endereco: ");
+            String endereco = scanner.nextLine();
 
-    System.out.print("Telefone: ");
-    String telefone = scanner.nextLine();
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
 
-    System.out.print("Sexo: ");
-    char sexo = scanner.next().charAt(0);
-    scanner.nextLine();
+            System.out.print("Sexo: ");
+            char sexo = scanner.next().charAt(0);
+            scanner.nextLine();
 
-    System.out.print("Matricula: ");
-    int matricula = scanner.nextInt();
-    scanner.nextLine(); 
+            System.out.print("Matricula: ");
+            int matricula = scanner.nextInt();
+            scanner.nextLine(); 
 
-    System.out.print("Especialidade: ");
-    String especialidade = scanner.nextLine();
+            System.out.print("Especialidade: ");
+            String especialidade = scanner.nextLine();
 
-    System.out.print("Salario: ");
-    double salario = scanner.nextDouble();
-    scanner.nextLine(); 
+            System.out.print("Salario: ");
+            double salario = scanner.nextDouble();
+            scanner.nextLine(); 
 
-    System.out.print("CRM: ");
-    String crm = scanner.nextLine();
+            System.out.print("CRM: ");
+            String crm = scanner.nextLine();
 
-    Medico medico = new Medico(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, especialidade, salario, crm);
+            Medico medico = new Medico(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, especialidade, salario, crm);
 
-    listaMedicos.add(medico);
+            listaMedicos.add(medico);
+            
+            System.out.println("\n===== Sistema de Cadastro e Login =====");
+            System.out.println("\nMedico cadastrado com sucesso!");
+            System.out.println("\nDeseja realizar outro cadastro?");
+            System.out.println("\n1. Cadastrar Medico");
+            System.out.println("0. Cadastrar Secretario");
+            System.out.print("\nDigite a opcao desejada: ");
 
-    System.out.println("Medico cadastrado com sucesso!");
-}
+            escolha = scanner.nextLine();
+
+        } while (!escolha.equals("0"));
+    }
 
     public void cadastrarSecretario() {
-    Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
 
-    System.out.println("Cadastro de Secretario");
-    System.out.print("Nome: ");
-    String nome = scanner.nextLine();
+        do {
+            System.out.println("\n===== Sistema de Cadastro de Secretario =====");
+            System.out.println("\nDados do Secretario");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
 
-    System.out.print("Data de Nascimento: ");
-    String dataNascimento = scanner.nextLine();
+            System.out.print("Data de Nascimento: ");
+            String dataNascimento = scanner.nextLine();
 
-    System.out.print("Idade: ");
-    int idade = scanner.nextInt();
-    scanner.nextLine(); 
+            System.out.print("Idade: ");
+            int idade = scanner.nextInt();
+            scanner.nextLine(); 
 
-    System.out.print("CPF: ");
-    String cpf = scanner.nextLine();
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
 
-    System.out.print("RG: ");
-    String rg = scanner.nextLine();
+            System.out.print("RG: ");
+            String rg = scanner.nextLine();
 
-    System.out.print("Endereco: ");
-    String endereco = scanner.nextLine();
+            System.out.print("Endereco: ");
+            String endereco = scanner.nextLine();
 
-    System.out.print("Telefone: ");
-    String telefone = scanner.nextLine();
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
 
-    System.out.print("Sexo: ");
-    char sexo = scanner.next().charAt(0);
-    scanner.nextLine(); 
+            System.out.print("Sexo: ");
+            char sexo = scanner.next().charAt(0);
+            scanner.nextLine(); 
 
-    System.out.print("Matricula: ");
-    int matricula = scanner.nextInt();
-    scanner.nextLine(); 
+            System.out.print("Matricula: ");
+            int matricula = scanner.nextInt();
+            scanner.nextLine(); 
 
-    System.out.print("Salario: ");
-    double salario = scanner.nextDouble();
-    scanner.nextLine(); 
+            System.out.print("Salario: ");
+            double salario = scanner.nextDouble();
+            scanner.nextLine(); 
 
-    Secretario secretario = new Secretario(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, salario);
+            Secretario secretario = new Secretario(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, salario);
 
-    listaSecretarios.add(secretario);
+            listaSecretarios.add(secretario);
 
-    System.out.println("Secretario cadastrado com sucesso!");
-}
+            System.out.println("\n===== Sistema de Cadastro e Login =====");
+            System.out.println("\nSecretario cadastrado com sucesso!");
+            System.out.println("\nDeseja realizar outro cadastro?");
+            System.out.println("\n1. Cadastrar Medico");
+            System.out.println("0. Cadastrar Secretario");
+            System.out.print("\nDigite a opcao desejada: ");
+
+            escolha = scanner.nextLine();
+
+        } while (!escolha.equals("0"));
+    }
 
 
-public void cadastrarAdministrador() {
-    Scanner scanner = new Scanner(System.in);
+    public void cadastrarAdministrador() {
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
 
-    System.out.println("Cadastro de Administrador");
-    System.out.print("Nome: ");
-    String nome = scanner.nextLine();
+        do {
+            System.out.println("\n===== Sistema de Cadastro de Administrador =====");
+            System.out.println("\nDados do Administrador");
+            System.out.print("Nome: ");
+            String nome = scanner.nextLine();
 
-    System.out.print("Data de Nascimento: ");
-    String dataNascimento = scanner.nextLine();
+            System.out.print("Data de Nascimento: ");
+            String dataNascimento = scanner.nextLine();
 
-    System.out.print("Idade: ");
-    int idade = scanner.nextInt();
-    scanner.nextLine();
+            System.out.print("Idade: ");
+            int idade = scanner.nextInt();
+            scanner.nextLine();
 
-    System.out.print("CPF: ");
-    String cpf = scanner.nextLine();
+            System.out.print("CPF: ");
+            String cpf = scanner.nextLine();
 
-    System.out.print("RG: ");
-    String rg = scanner.nextLine();
+            System.out.print("RG: ");
+            String rg = scanner.nextLine();
 
-    System.out.print("Endereco: ");
-    String endereco = scanner.nextLine();
+            System.out.print("Endereco: ");
+            String endereco = scanner.nextLine();
 
-    System.out.print("Telefone: ");
-    String telefone = scanner.nextLine();
+            System.out.print("Telefone: ");
+            String telefone = scanner.nextLine();
 
-    System.out.print("Sexo: ");
-    char sexo = scanner.next().charAt(0);
-    scanner.nextLine();
+            System.out.print("Sexo: ");
+            char sexo = scanner.next().charAt(0);
+            scanner.nextLine();
 
-    System.out.print("Matricula: ");
-    int matricula = scanner.nextInt();
-    scanner.nextLine(); 
+            System.out.print("Matricula: ");
+            int matricula = scanner.nextInt();
+            scanner.nextLine(); 
 
-    System.out.print("Funcao: ");
-    String funcao = scanner.nextLine();
+            System.out.print("Funcao: ");
+            String funcao = scanner.nextLine();
 
-    Administrador administrador = new Administrador(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, funcao);
+            Administrador administrador = new Administrador(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula, funcao);
 
-    listaAdministradores.add(administrador);
+            listaAdministradores.add(administrador);
+            
+            System.out.println("\n===== Sistema de Cadastro e Login =====");
+            System.out.println("\nAdministrador cadastrado com sucesso!");
+            System.out.println("\nDeseja realizar outro cadastro?");
+            System.out.println("\n1. Cadastrar Medico");
+            System.out.println("0. Cadastrar Secretario");
+            System.out.print("\nDigite a opcao desejada: ");
 
-    System.out.println("Administrador cadastrado com sucesso!");
-}
+            escolha = scanner.nextLine();
+
+        } while (!escolha.equals("0"));
+    }
 
     
     public ArrayList<Medico> getListaMedicos() {

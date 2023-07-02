@@ -6,8 +6,6 @@ public class Main {
      */
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
-        //Administrador administrador = new Administrador("Otaviano", "31/07/1990", 31, "03969237394", "2002030061587", "Rua A", "88992784105", 'M', 411631, "Engenheiro");
-        
 
         Login login;
 
@@ -15,7 +13,7 @@ public class Main {
 
         String escolha;
         do {
-            clearConsole();
+            //clearConsole();
             exibirMenu();
             escolha = scanner.nextLine();
 
@@ -62,7 +60,7 @@ public class Main {
 
     private static void exibirMenu() {
         System.out.println("===== Sistema de Cadastro e Login =====");
-        System.out.println("1. Cadastrar Medico");
+        System.out.println("\n1. Cadastrar Medico");
         System.out.println("2. Cadastrar Secretario");
         System.out.println("3. Cadastrar Administrador");
         System.out.println("4. Fazer login como Medico");

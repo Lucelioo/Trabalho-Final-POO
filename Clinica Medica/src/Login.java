@@ -11,31 +11,50 @@ public class Login {
 
     public void fazerLoginMedico(ArrayList<Medico> medicos) {
         for (Medico medico : medicos) {
-            if (medico.getNome().equals(nome) && medico.getMatricula() == matricula) {
-                System.out.println("Login realizado com sucesso");
-                return;
+            if (medico.getNome().equals(nome)) {
+                if (medico.getNome().equals(nome) && medico.getMatricula() == matricula) {
+                    System.out.println("Login realizado com sucesso\n");
+                }
+                else{
+                    System.out.println("Matricula invalida\n");
+                }
+            }
+            else{
+                System.out.println("Nome invalido\n");
             }
         }
-        System.out.println("Nome e/ou matricula invalidos");
+        
     }
 
     public void fazerLoginSecretario(ArrayList<Secretario> secretarios) {
         for (Secretario secretario : secretarios) {
-            if (secretario.getNome().equals(nome) && secretario.getMatricula() == matricula) {
-                System.out.println("Login realizado com sucesso");
-                return;
+            if (secretario.getNome().equals(nome)) {
+                if (secretario.getNome().equals(nome) && secretario.getMatricula() == matricula) {
+                    System.out.println("Login realizado com sucesso\n");
+                }
+                else{
+                    System.out.println("Matricula invalida\n");
+                }
+            }
+            else{
+                System.out.println("Nome invalido\n");
             }
         }
-        System.out.println("Nome e/ou matricula invalidos");
     }
 
     public void fazerLoginAdministrador(ArrayList<Administrador> administradores) {
         for (Administrador administrador : administradores) {
-            if (administrador.getNome().equals(nome) && administrador.getMatricula() == matricula) {
-                System.out.println("Login realizado com sucesso");
-                return;
+            if (administrador.getNome().equals(nome)) {
+                if (administrador.getNome().equals(nome) && administrador.getMatricula() == matricula) {
+                    System.out.println("Login realizado com sucesso\n");
+                }
+                else{
+                    System.out.println("Matricula invalida\n");
+                }
+            }
+            else{
+                System.out.println("Nome invalido\n");
             }
         }
-        System.out.println("Nome e/ou matricula inválidos");
     }
 }
