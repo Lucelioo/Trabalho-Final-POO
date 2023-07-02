@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,6 +74,8 @@ public class Cadastro {
             escolha = scanner.nextLine();
 
         } while (!escolha.equals("0"));
+
+        salvarDados();
     }
 
     public void cadastrarSecretario() {
@@ -130,6 +133,8 @@ public class Cadastro {
             escolha = scanner.nextLine();
 
         } while (!escolha.equals("0"));
+
+        salvarDados();
     }
 
 
@@ -187,8 +192,38 @@ public class Cadastro {
             escolha = scanner.nextLine();
 
         } while (!escolha.equals("0"));
+
+        salvarDados();
     }
 
+    public void salvarDados() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("dados.bin");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(listaMedicos);
+            objectOut.writeObject(listaSecretarios);
+            objectOut.writeObject(listaAdministradores);
+            objectOut.close();
+            System.out.println("Dados salvos com sucesso!");
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar os dados: " + e.getMessage());
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    public void carregarDados() {
+        try {
+            FileInputStream fileIn = new FileInputStream("dados.bin");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            listaMedicos = (ArrayList<Medico>) objectIn.readObject();
+            listaSecretarios = (ArrayList<Secretario>) objectIn.readObject();
+            listaAdministradores = (ArrayList<Administrador>) objectIn.readObject();
+            objectIn.close();
+            System.out.println("Dados carregados com sucesso!");
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Erro ao carregar os dados: " + e.getMessage());
+        }
+    }
     
     public ArrayList<Medico> getListaMedicos() {
         return listaMedicos;

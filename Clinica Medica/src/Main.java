@@ -35,17 +35,46 @@ public class Main {
                     case 4:
                         clearConsole();
                         login = fazerLogin(scanner);
-                        login.fazerLoginMedico(cadastro.getListaMedicos());
+                        String retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
+                        while (retorno4.equals("Nome invalido!") || retorno4.equals("Matricula invalida!")) {
+                            clearConsole();
+                            System.out.println(retorno4);
+                            System.out.println("\n1. Deseja Fazer login novamente?");
+                            System.out.println("0. Sair");
+                            System.out.print("\nDigite a opcao desejada: ");
+                            String opcao4 = scanner.nextLine();
+
+                            if(!opcao4.equals("0")){
+                                login = fazerLogin(scanner);
+                                retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
+                            }
+                            break;
+                        }
+                        System.out.println("Login realizado com sucesso\n");
                         break;
                     case 5:
                         clearConsole();
                         login = fazerLogin(scanner);
-                        login.fazerLoginSecretario(cadastro.getListaSecretarios());
+                        String retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
+                        while (retorno5.equals("Nome invalido!") || retorno5.equals("Matricula invalida!")) {
+                            clearConsole();
+                            System.out.println(retorno5);
+                            login = fazerLogin(scanner);
+                            retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
+                        }
+                        System.out.println("Login realizado com sucesso\n");
                         break;
                     case 6:
                         clearConsole();
                         login = fazerLogin(scanner);
-                        login.fazerLoginAdministrador(cadastro.getListaAdministradores());
+                        String retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
+                        while (retorno6.equals("Nome invalido!") || retorno6.equals("Matricula invalida!")) {
+                            clearConsole();
+                            System.out.println(retorno6);
+                            login = fazerLogin(scanner);
+                            retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
+                        }
+                        System.out.println("Login realizado com sucesso\n");
                         break;
                     case 7:
                         System.out.println("Saindo...");

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Login {
+public class Login extends Cadastro {
     private String nome;
     private int matricula;
 
@@ -9,55 +9,45 @@ public class Login {
         this.matricula = matricula;
     }
 
-    public boolean fazerLoginMedico(ArrayList<Medico> medicos) {
+    public String fazerLoginMedico(ArrayList<Medico> medicos) {
+        carregarDados();
         for (Medico medico : medicos) {
             if (medico.getNome().equals(nome)) {
-                if (medico.getMatricula() == matricula) {
-                    System.out.println("Login realizado com sucesso\n");
-                    return true;
+                if (medico.getNome().equals(nome) && medico.getMatricula() == matricula) {
+                    return "Login valido!";
+                } else {
+                    return "Matricula invalida!";
                 }
-                else{
-                    System.out.println("Matricula invalida\n");
-                    return false;
-                }
-            }
+            }   
         }
-        System.out.println("Nome invalido\n");
-        return false;
-        
+        return "Nome invalido!";
     }
 
-    public boolean fazerLoginSecretario(ArrayList<Secretario> secretarios) {
+    public String fazerLoginSecretario(ArrayList<Secretario> secretarios) {
+        carregarDados();
         for (Secretario secretario : secretarios) {
             if (secretario.getNome().equals(nome)) {
-                if (secretario.getMatricula() == matricula) {
-                    System.out.println("Login realizado com sucesso\n");
-                    return true;
+                if (secretario.getNome().equals(nome) && secretario.getMatricula() == matricula) {
+                    return "Login valido!";
+                } else {
+                    return "Matricula invalida!";
                 }
-                else{
-                    System.out.println("Matricula invalida\n");
-                    return false;
-                }
-            }
+            }   
         }
-        System.out.println("Nome invalido\n");
-            return false;
+        return "Nome invalido!";
     }
 
-    public boolean fazerLoginAdministrador(ArrayList<Administrador> administradores) {
+    public String fazerLoginAdministrador(ArrayList<Administrador> administradores) {
+        carregarDados();
         for (Administrador administrador : administradores) {
             if (administrador.getNome().equals(nome)) {
-                if (administrador.getMatricula() == matricula) {
-                    System.out.println("Login realizado com sucesso\n");
-                    return true;
+                if (administrador.getNome().equals(nome) && administrador.getMatricula() == matricula) {
+                    return "Login valido!";
+                } else {
+                    return "Matricula invalida!";
                 }
-                else{
-                    System.out.println("Matricula invalida\n");
-                    return false;
-                }
-            }
+            }   
         }
-        System.out.println("Nome invalido\n");
-        return false;
+        return "Nome invalido!";
     }
 }
