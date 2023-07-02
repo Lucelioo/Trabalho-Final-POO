@@ -87,4 +87,23 @@ public class Main {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
+   //base para calendario
+    Calendario calendario = new Calendario();
+
+        Medico medico = new Medico("Dr. João", "01/01/1980", 40, "12345678901",
+                "1234567", "Rua A, 123", "123456789", 'M', 12345, "Cardiologia", 5000.0, "CRM12345");
+
+        Paciente paciente = new Paciente("Maria", "02/02/1990", 30, "98765432109",
+                "7654321", "Rua B, 456", "987654321", 'F', "ConvenioX");
+
+        try {
+            calendario.registrarHorario(medico, "01/07/2023", "09:00", paciente);
+            calendario.registrarHorario(medico, "01/07/2023", "14:30", paciente);
+            calendario.registrarHorario(medico, "01/07/2023", "11:30", paciente);
+        } catch (Calendario.HorarioOcupadoException e) {
+            System.out.println("Erro: " + e.getMessage());
+        }
+
+        calendario.imprimirAgendamentosDoDia("01/07/2023");
 }
