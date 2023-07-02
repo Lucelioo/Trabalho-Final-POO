@@ -6,7 +6,7 @@ public class Main {
      */
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
-
+        
         Login login;
 
         Scanner scanner = new Scanner(System.in);

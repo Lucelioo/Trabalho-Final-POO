@@ -10,7 +10,6 @@ public class Login extends Cadastro {
     }
 
     public String fazerLoginMedico(ArrayList<Medico> medicos) {
-        carregarDados();
         for (Medico medico : medicos) {
             if (medico.getNome().equals(nome)) {
                 if (medico.getNome().equals(nome) && medico.getMatricula() == matricula) {
@@ -24,7 +23,6 @@ public class Login extends Cadastro {
     }
 
     public String fazerLoginSecretario(ArrayList<Secretario> secretarios) {
-        carregarDados();
         for (Secretario secretario : secretarios) {
             if (secretario.getNome().equals(nome)) {
                 if (secretario.getNome().equals(nome) && secretario.getMatricula() == matricula) {
@@ -38,7 +36,6 @@ public class Login extends Cadastro {
     }
 
     public String fazerLoginAdministrador(ArrayList<Administrador> administradores) {
-        carregarDados();
         for (Administrador administrador : administradores) {
             if (administrador.getNome().equals(nome)) {
                 if (administrador.getNome().equals(nome) && administrador.getMatricula() == matricula) {

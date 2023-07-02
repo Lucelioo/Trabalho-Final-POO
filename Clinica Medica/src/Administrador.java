@@ -1,6 +1,9 @@
-public class Administrador extends Funcionario {
+public class Administrador extends Funcionario{
     private String funcao;
 
+    public Administrador() {
+        super(null, null, 0, null, null, null, null, '\u0000', 0);
+    }
     public Administrador(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo, int matricula, String funcao) {
         super(nome, dataNascimento, idade, cpf, rg, endereco, telefone, sexo, matricula);
         this.funcao = funcao;
