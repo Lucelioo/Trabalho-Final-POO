@@ -11,33 +11,34 @@ public class Main {
         Cadastro cadastro = new Cadastro();
         //cadastro = carregarListas();
         Calendario calendario = new Calendario();
-
+        Administrador administrador = new Administrador("Admin", "01/07/2023", 0, "11122233344", "555666777", "Rua A", "88988998899", 'M', 123456, "Administrador");
+        cadastro.listaAdministradores.add(administrador);
         Login login;
         Scanner scanner = new Scanner(System.in);
-
         String escolha;
+
         do {
             //clearConsole();
             exibirMenu();
             escolha = scanner.nextLine();
 
-            if (escolha.matches("^[1-9]$")) {
+            if (escolha.matches("^[0-9]$")) {
                 int opcao = Integer.parseInt(escolha);
                 switch (opcao) {
                     case 1:
-                        clearConsole();
+                        //clearConsole();
                         login = fazerLogin(scanner);
                         String retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
                         while (retorno4.equals("Nome invalido!") || retorno4.equals("Matricula invalida!")) {
-                            clearConsole();
+                            //clearConsole();
                             System.out.println(retorno4);
                             System.out.println("\n1. Deseja tentar fazer login novamente?");
-                            System.out.println("0. Sair");
+                            System.out.println("0. Voltar ao menu anterior");
                             System.out.print("\nDigite a opcao desejada: ");
                             String opcao4 = scanner.nextLine();
 
                             if(!opcao4.equals("0")){
-                                clearConsole();
+                                //clearConsole();
                                 login = fazerLogin(scanner);
                                 retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
                             }
@@ -47,19 +48,19 @@ public class Main {
                         menuMedico();
                         break;
                     case 2:
-                        clearConsole();
+                        //clearConsole();
                         login = fazerLogin(scanner);
                         String retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
                         while (retorno5.equals("Nome invalido!") || retorno5.equals("Matricula invalida!")) {
-                            clearConsole();
+                            //clearConsole();
                             System.out.println(retorno5);
                             System.out.println("\n1. Deseja tentar fazer login novamente?");
-                            System.out.println("0. Sair");
+                            System.out.println("0. Voltar ao menu anterior");
                             System.out.print("\nDigite a opcao desejada: ");
                             String opcao5 = scanner.nextLine();
 
                             if(!opcao5.equals("0")){
-                                clearConsole();
+                                //clearConsole();
                                 login = fazerLogin(scanner);
                                 retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
                             }
@@ -68,19 +69,19 @@ public class Main {
                         menuSecretario();
                         break;
                     case 3:
-                        clearConsole();
+                        //clearConsole();
                         login = fazerLogin(scanner);
                         String retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
                         while (retorno6.equals("Nome invalido!") || retorno6.equals("Matricula invalida!")) {
-                            clearConsole();
+                            //clearConsole();
                             System.out.println(retorno6);
                             System.out.println("\n1. Deseja tentar fazer login novamente?");
-                            System.out.println("0. Sair");
+                            System.out.println("0. Voltar ao menu anterior");
                             System.out.print("\nDigite a opcao desejada: ");
                             String opcao5 = scanner.nextLine();
 
                             if(!opcao5.equals("0")){
-                                clearConsole();
+                                //clearConsole();
                                 login = fazerLogin(scanner);
                                 retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
                             }
@@ -89,7 +90,7 @@ public class Main {
                         menuAdministrador();
                         System.out.println("Login realizado com sucesso\n");
                         break;
-                    case 9:
+                    case 0:
                         System.out.println("Saindo...");
                         break;
                     default:
@@ -97,7 +98,7 @@ public class Main {
                         break;
                 }
             }
-        } while (!escolha.equals("9"));
+        } while (!escolha.equals("0"));
 
         salvarListas(cadastro);
     }
@@ -129,7 +130,8 @@ public class Main {
         Object escolha;
         do {                       
             
-            System.out.println("\n===== Sistema de Agendamento =====");
+            System.out.println("\n===== Sistema Clinica =====");
+            System.out.println("=====   Agendamento   =====");
             System.out.println("Qual o dia: ");
             String data = scanner.nextLine();
             System.out.println("Qual o horario: ");
@@ -140,15 +142,18 @@ public class Main {
 
             try {
                 calendario.registrarHorario(medico, data, horario, valor, paciente);
+                System.out.println("\n===== Sistema Clinica =====");
+                System.out.println("=====   Agendamento   =====");
+                System.out.println("\nAgendamento realizado com sucesso!");
             } catch (Calendario.HorarioOcupadoException e) {
-                System.out.println("Erro: " + e.getMessage());
+                System.out.println("\n===== Sistema Clinica =====");
+                System.out.println("=====   Agendamento   =====");
+                System.out.println("\nErro: " + e.getMessage());
             }
             
-            System.out.println("\n===== Menu Agendamento =====");
-            System.out.println("\nAgendamento realizado com sucesso!");
             System.out.println("\nDeseja realizar outro agendamento?");
             System.out.println("1. Cadastrar Paciente");
-            System.out.println("0. Sair");
+            System.out.println("0. Voltar ao menu anterior");
             System.out.print("\nDigite a opcao desejada: ");
             escolha = scanner.nextLine();
 
@@ -163,21 +168,30 @@ public class Main {
         Calendario calendario = new Calendario();
         List<Paciente> pacientes = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        String escolha;
 
-        System.out.println("===== Menu Medico =====");
-        System.out.println("1. Cadastrar Paciente");
-        String data = scanner.nextLine();
+        do{
+            System.out.println("\n===== Sistema Clinica =====");
+            System.out.println("=====  Agenda do Dia  =====");
+            System.out.println("\nQual o dia: ");
+            String data = scanner.nextLine();
 
-        calendario.imprimirAgendamentosDoDia(data);
+            calendario.imprimirAgendamentosDoDia(data);
+            System.out.println("\n1. Imprimir Agenda do Dia");
+            System.out.println("0. Voltar ao menu anterior");
+            System.out.print("\nDigite a opcao desejada: ");
+            escolha = scanner.nextLine();
+        } while (!escolha.equals("0"));
     }
 
 
     private static void exibirMenu() {
-        System.out.println("===== Sistema de Cadastro e Login =====");
-        System.out.println("1. Fazer login como Medico");
+        System.out.println("\n===== Sistema Clinica =====");
+        System.out.println("=====      Login      =====");
+        System.out.println("\n1. Fazer login como Medico");
         System.out.println("2. Fazer login como Secretario");
         System.out.println("3. Fazer login como Administrador");
-        System.out.println("9. Sair");
+        System.out.println("0. Sair");
         System.out.print("\nDigite a opcao desejada: ");
     }
 
@@ -187,33 +201,31 @@ public class Main {
         String escolha;
 
         do{
-            System.out.println("===== Menu Secretario =====");
+            System.out.println("\n===== Sistema Clinica =====");
+            System.out.println("=====    Secretario   =====");
             System.out.println("\n1. Agendar Horario");
             System.out.println("2. Imprimir Agenda do Dia");
-            System.out.println("9. Sair");
+            System.out.println("0. Voltar ao menu anterior");
             System.out.print("\nDigite a opcao desejada: ");
             escolha = scanner.nextLine();
 
-            if (escolha.matches("^[1-9]$")) {
+            if (escolha.matches("^[0-9]$")) {
                 int opcao = Integer.parseInt(escolha);
                 switch (opcao) {
                     case 1:
-                        clearConsole();
+                        //clearConsole();
                         calendario = agendarHorario();
                         break;
                     case 2:
-                        clearConsole();
+                        //clearConsole();
                         imprimirAgendamentosDia();
-                        break;
-                    case 9:
-                        System.out.println("Saindo...");
                         break;
                     default:
                         System.out.println("Opcao invalida");
                         break;
                 }
             }
-        } while (!escolha.equals("9"));
+        } while (!escolha.equals("0"));
         
     }
 
@@ -223,12 +235,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String escolha;
 
-        
-        //
-        //
-
         do{
-            System.out.println("===== Menu Medico =====");
+            System.out.println("\n===== Sistema Clinica =====");
+            System.out.println("=====   Menu Medico   =====");
             System.out.println("\n1. Agenda do Dia");
             System.out.println("2. Prontuario do Paciente");
             System.out.println("3. Imprimir Protuario");
@@ -236,20 +245,21 @@ public class Main {
             System.out.println("5. imprimir Exames");
             System.out.println("6. Solicitar Receita");
             System.out.println("7. Imprimir Receita");
-            System.out.println("9. Sair");
+            System.out.println("0. Voltar ao menu anterior");
             System.out.print("\nDigite a opcao desejada: ");
             escolha = scanner.nextLine();
 
-            if (escolha.matches("^[1-9]$")) {
+            if (escolha.matches("^[0-9]$")) {
                 int opcao = Integer.parseInt(escolha);
                 switch (opcao) {
                     case 1:
-                        clearConsole();
+                        //clearConsole();
                         imprimirAgendamentosDia();
                         break;
                     case 2:
-                        clearConsole();
-                        System.out.println("===== Menu Medico =====");
+                        //clearConsole();
+                        System.out.println("\n===== Sistema Clinica =====");
+                        System.out.println("=====    Pontuario    =====");
                         System.out.println("\n1. Qual o nome do paciente: ");
                         String nome = scanner.nextLine(); 
 
@@ -262,79 +272,81 @@ public class Main {
                         //prontuario.adicionarExame("Raio-X do tórax");
                         break;
                     case 3:
-                        clearConsole();
+                        //clearConsole();
                         System.out.println("Em Desenvolvimento..");
                         break;
                     case 4:
-                        clearConsole();
+                        //clearConsole();
                         System.out.println("Em Desenvolvimento..");
                         break;
                     case 5:
-                        clearConsole();
+                        //clearConsole();
                         System.out.println("Em Desenvolvimento..");
-                        break;
-                    case 9:
-                        System.out.println("Saindo...");
                         break;
                     default:
                         System.out.println("Opcao invalida");
                         break;
                 }
             }
-        } while (!escolha.equals("9"));
+        } while (!escolha.equals("0"));
         
     }
 
+    public static void clearConsole() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     private static void menuAdministrador(){
+
         Calendario calendario = new Calendario();
         Cadastro cadastro = new Cadastro();
         Scanner scanner = new Scanner(System.in);
         String escolha;
 
         do{
+            System.out.println("\n===== Sistema Clinica =====");
             System.out.println("===== Menu Secretario =====");
             System.out.println("\n1. Cadastrar Medico");
             System.out.println("2. Cadastrar Secretario");
             System.out.println("3. Cadastrar Administrador");
             System.out.println("4. Cadastrar Paciente");
-            System.out.println("9. Sair");
+            System.out.println("0. Voltar ao menu anterior");
             System.out.print("\nDigite a opcao desejada: ");
             escolha = scanner.nextLine();
 
-            if (escolha.matches("^[1-9]$")) {
+            if (escolha.matches("^[0-9]$")) {
                 int opcao = Integer.parseInt(escolha);
                 switch (opcao) {
                     case 1:
-                        clearConsole();
+                        //clearConsole();
                         cadastro.cadastrarMedico();
                         break;
                     case 2:
-                        clearConsole();
+                        //clearConsole();
                         cadastro.cadastrarSecretario();
                         break;
                     case 3:
-                        clearConsole();
+                        //clearConsole();
                         cadastro.cadastrarAdministrador();
                         break;
                     case 4:
-                        clearConsole();
+                        //clearConsole();
                         cadastro.cadastrarPaciente();
-                        break;
-                    case 9:
-                        System.out.println("Saindo...");
                         break;
                     default:
                         System.out.println("Opcao invalida");
                         break;
                 }
             }
-        } while (!escolha.equals("9"));
+        } while (!escolha.equals("0"));
         
     }
 
     private static Login fazerLogin(Scanner scanner) {
-        System.out.println("===== Login =====");
-        System.out.print("Nome: ");
+        System.out.println("\n===== Sistema Clinica =====");
+        System.out.println("=====      Login      =====");
+        System.out.print("\nNome: ");
         String nome = scanner.nextLine();
         System.out.print("Matricula: ");
         int matricula = scanner.nextInt();
@@ -342,12 +354,6 @@ public class Main {
 
         return new Login(nome, matricula);
     }
-
-    public static void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-    
     
     private static void salvarListas(Cadastro cadastro) {
         try {

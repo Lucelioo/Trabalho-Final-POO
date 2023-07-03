@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Cadastro implements Serializable {
     private ArrayList<Medico> listaMedicos;
     private ArrayList<Secretario> listaSecretarios;
-    private ArrayList<Administrador> listaAdministradores;
+    ArrayList<Administrador> listaAdministradores;
     private ArrayList<Paciente> listaPacientes;
 
     public Cadastro() {
