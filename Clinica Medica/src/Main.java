@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -7,10 +9,10 @@ public class Main {
      */
     public static void main(String[] args) {
         Cadastro cadastro = new Cadastro();
-        cadastro = carregarListas();
+        //cadastro = carregarListas();
+        Calendario calendario = new Calendario();
 
         Login login;
-
         Scanner scanner = new Scanner(System.in);
 
         String escolha;
@@ -19,22 +21,10 @@ public class Main {
             exibirMenu();
             escolha = scanner.nextLine();
 
-            if (escolha.matches("^[1-7]$")) {
+            if (escolha.matches("^[1-9]$")) {
                 int opcao = Integer.parseInt(escolha);
                 switch (opcao) {
                     case 1:
-                        clearConsole();
-                        cadastro.cadastrarMedico();
-                        break;
-                    case 2:
-                        clearConsole();
-                        cadastro.cadastrarSecretario();
-                        break;
-                    case 3:
-                        clearConsole();
-                        cadastro.cadastrarAdministrador();
-                        break;
-                    case 4:
                         clearConsole();
                         login = fazerLogin(scanner);
                         String retorno4 = login.fazerLoginMedico(cadastro.getListaMedicos());
@@ -54,8 +44,9 @@ public class Main {
                             break;
                         }
                         System.out.println("Login realizado com sucesso\n");
+                        menuMedico();
                         break;
-                    case 5:
+                    case 2:
                         clearConsole();
                         login = fazerLogin(scanner);
                         String retorno5 = login.fazerLoginSecretario(cadastro.getListaSecretarios());
@@ -74,8 +65,9 @@ public class Main {
                             }
                         }
                         System.out.println("Login realizado com sucesso\n");
+                        menuSecretario();
                         break;
-                    case 6:
+                    case 3:
                         clearConsole();
                         login = fazerLogin(scanner);
                         String retorno6 = login.fazerLoginAdministrador(cadastro.getListaAdministradores());
@@ -94,9 +86,10 @@ public class Main {
                             }
                            
                         }
+                        menuAdministrador();
                         System.out.println("Login realizado com sucesso\n");
                         break;
-                    case 7:
+                    case 9:
                         System.out.println("Saindo...");
                         break;
                     default:
@@ -104,40 +97,239 @@ public class Main {
                         break;
                 }
             }
-        } while (!escolha.equals("7"));
-
-           //base para calendario
-    Calendario calendario = new Calendario();
-
-        Medico medico = new Medico("Dr. Joao", "01/01/1980", 40, "12345678901",
-                "1234567", "Rua A, 123", "85981234532", 'M', 12345, "Cardiologia", 5000.0, "CRM12345");
-
-        Paciente paciente = new Paciente("Maria", "02/02/1990", 30, "98765432109",
-                "7654321", "Rua B, 456", "987654321", 'F', "ConvenioX");
-
-        try {
-            calendario.registrarHorario(medico, "01/07/2023", "09:00", paciente);
-            calendario.registrarHorario(medico, "01/07/2023", "14:30", paciente);
-            calendario.registrarHorario(medico, "01/07/2023", "11:30", paciente);
-        } catch (Calendario.HorarioOcupadoException e) {
-            System.out.println("Erro: " + e.getMessage());
-        }
-
-        calendario.imprimirAgendamentosDoDia("01/07/2023");
+        } while (!escolha.equals("9"));
 
         salvarListas(cadastro);
     }
 
+    // Pesquisar um paciente pelo nome
+    public static Paciente buscarPaciente(List<Paciente> pacientes, String nome) {
+        for (Paciente paciente : pacientes) {
+            if (paciente.getNome().equalsIgnoreCase(nome)) {
+                return paciente;
+            }
+        }
+        return null;
+    }
+
+
+    public static Calendario agendarHorario() {
+        Calendario calendario = new Calendario();
+        List<Paciente> pacientes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        
+
+        Medico medico = new Medico("Dr. Joao", "01/01/1980", 40, "12345678901",
+                "1234567", "Rua A, 123", "85998123532", 'M', 123456, "Cardiologia", 5000.0, "CRM12345");
+        
+        Paciente paciente = new Paciente("Dr. Joao", "01/01/1980", 40, "12345678901", "1234567", "Rua A, 123", "85998123532", 'M', "Unimed");
+        
+        pacientes.add(paciente);
+
+        Object escolha;
+        do {                       
+            
+            System.out.println("\n===== Sistema de Agendamento =====");
+            System.out.println("Qual o dia: ");
+            String data = scanner.nextLine();
+            System.out.println("Qual o horario: ");
+            String horario = scanner.nextLine();
+            System.out.println("Qual o valor: ");
+            double valor = scanner.nextDouble();
+            scanner.nextLine();
+
+            try {
+                calendario.registrarHorario(medico, data, horario, valor, paciente);
+            } catch (Calendario.HorarioOcupadoException e) {
+                System.out.println("Erro: " + e.getMessage());
+            }
+            
+            System.out.println("\n===== Menu Agendamento =====");
+            System.out.println("\nAgendamento realizado com sucesso!");
+            System.out.println("\nDeseja realizar outro agendamento?");
+            System.out.println("1. Cadastrar Paciente");
+            System.out.println("0. Sair");
+            System.out.print("\nDigite a opcao desejada: ");
+            escolha = scanner.nextLine();
+
+        } while (!escolha.equals("0"));
+
+        return calendario;
+
+        //
+    }
+
+    private static void imprimirAgendamentosDia(){
+        Calendario calendario = new Calendario();
+        List<Paciente> pacientes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("===== Menu Medico =====");
+        System.out.println("1. Cadastrar Paciente");
+        String data = scanner.nextLine();
+
+        calendario.imprimirAgendamentosDoDia(data);
+    }
+
+
     private static void exibirMenu() {
         System.out.println("===== Sistema de Cadastro e Login =====");
-        System.out.println("\n1. Cadastrar Medico");
-        System.out.println("2. Cadastrar Secretario");
-        System.out.println("3. Cadastrar Administrador");
-        System.out.println("4. Fazer login como Medico");
-        System.out.println("5. Fazer login como Secretario");
-        System.out.println("6. Fazer login como Administrador");
-        System.out.println("7. Sair");
+        System.out.println("1. Fazer login como Medico");
+        System.out.println("2. Fazer login como Secretario");
+        System.out.println("3. Fazer login como Administrador");
+        System.out.println("9. Sair");
         System.out.print("\nDigite a opcao desejada: ");
+    }
+
+    private static void menuSecretario(){
+        Calendario calendario = new Calendario();
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
+
+        do{
+            System.out.println("===== Menu Secretario =====");
+            System.out.println("\n1. Agendar Horario");
+            System.out.println("2. Imprimir Agenda do Dia");
+            System.out.println("9. Sair");
+            System.out.print("\nDigite a opcao desejada: ");
+            escolha = scanner.nextLine();
+
+            if (escolha.matches("^[1-9]$")) {
+                int opcao = Integer.parseInt(escolha);
+                switch (opcao) {
+                    case 1:
+                        clearConsole();
+                        calendario = agendarHorario();
+                        break;
+                    case 2:
+                        clearConsole();
+                        imprimirAgendamentosDia();
+                        break;
+                    case 9:
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opcao invalida");
+                        break;
+                }
+            }
+        } while (!escolha.equals("9"));
+        
+    }
+
+    private static void menuMedico(){
+        Calendario calendario = new Calendario();
+        List<Paciente> pacientes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
+
+        
+        //
+        //
+
+        do{
+            System.out.println("===== Menu Medico =====");
+            System.out.println("\n1. Agenda do Dia");
+            System.out.println("2. Prontuario do Paciente");
+            System.out.println("3. Imprimir Protuario");
+            System.out.println("4. Solicitar Exames");
+            System.out.println("5. imprimir Exames");
+            System.out.println("6. Solicitar Receita");
+            System.out.println("7. Imprimir Receita");
+            System.out.println("9. Sair");
+            System.out.print("\nDigite a opcao desejada: ");
+            escolha = scanner.nextLine();
+
+            if (escolha.matches("^[1-9]$")) {
+                int opcao = Integer.parseInt(escolha);
+                switch (opcao) {
+                    case 1:
+                        clearConsole();
+                        imprimirAgendamentosDia();
+                        break;
+                    case 2:
+                        clearConsole();
+                        System.out.println("===== Menu Medico =====");
+                        System.out.println("\n1. Qual o nome do paciente: ");
+                        String nome = scanner.nextLine(); 
+
+                        //nome = buscarPaciente(pacientes, nome );
+                        
+                        Prontuario prontuario = new Prontuario(nome);
+                        //prontuario.adicionarReceita("Dipirona 500mg - Tomar 1 comprimido a cada 6 horas");
+                        //prontuario.adicionarReceita("Amoxicilina 500mg - Tomar 1 comprimido a cada 8 horas");
+                        //prontuario.adicionarExame("Hemograma completo");
+                        //prontuario.adicionarExame("Raio-X do tórax");
+                        break;
+                    case 3:
+                        clearConsole();
+                        System.out.println("Em Desenvolvimento..");
+                        break;
+                    case 4:
+                        clearConsole();
+                        System.out.println("Em Desenvolvimento..");
+                        break;
+                    case 5:
+                        clearConsole();
+                        System.out.println("Em Desenvolvimento..");
+                        break;
+                    case 9:
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opcao invalida");
+                        break;
+                }
+            }
+        } while (!escolha.equals("9"));
+        
+    }
+
+    private static void menuAdministrador(){
+        Calendario calendario = new Calendario();
+        Cadastro cadastro = new Cadastro();
+        Scanner scanner = new Scanner(System.in);
+        String escolha;
+
+        do{
+            System.out.println("===== Menu Secretario =====");
+            System.out.println("\n1. Cadastrar Medico");
+            System.out.println("2. Cadastrar Secretario");
+            System.out.println("3. Cadastrar Administrador");
+            System.out.println("4. Cadastrar Paciente");
+            System.out.println("9. Sair");
+            System.out.print("\nDigite a opcao desejada: ");
+            escolha = scanner.nextLine();
+
+            if (escolha.matches("^[1-9]$")) {
+                int opcao = Integer.parseInt(escolha);
+                switch (opcao) {
+                    case 1:
+                        clearConsole();
+                        cadastro.cadastrarMedico();
+                        break;
+                    case 2:
+                        clearConsole();
+                        cadastro.cadastrarSecretario();
+                        break;
+                    case 3:
+                        clearConsole();
+                        cadastro.cadastrarAdministrador();
+                        break;
+                    case 4:
+                        clearConsole();
+                        cadastro.cadastrarPaciente();
+                        break;
+                    case 9:
+                        System.out.println("Saindo...");
+                        break;
+                    default:
+                        System.out.println("Opcao invalida");
+                        break;
+                }
+            }
+        } while (!escolha.equals("9"));
+        
     }
 
     private static Login fazerLogin(Scanner scanner) {

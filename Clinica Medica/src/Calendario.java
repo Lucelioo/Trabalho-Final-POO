@@ -12,7 +12,7 @@ public class Calendario {
         agenda = new ArrayList<>();
     }
 
-    public void registrarHorario(Medico medico, String dia, String horario, Paciente paciente) throws HorarioOcupadoException {
+    public void registrarHorario(Medico medico, String dia, String horario, double valor, Paciente paciente) throws HorarioOcupadoException {
         if (!disponibilidade.containsKey(medico)) {
             disponibilidade.put(medico, new HashMap<>());
         }
@@ -26,12 +26,12 @@ public class Calendario {
         List<String> horariosDoDia = agendaMedico.get(dia);
 
         if (horariosDoDia.contains(horario)) {
-            throw new HorarioOcupadoException("O horário já está ocupado.");
+            throw new HorarioOcupadoException("O horario ja esta ocupado.");
         }
 
         horariosDoDia.add(horario);
 
-        Agendamento agendamento = new Agendamento(medico, dia, horario, paciente);
+        Agendamento agendamento = new Agendamento(medico, dia, horario, valor, paciente);
         agenda.add(agendamento);
     }
 
@@ -39,8 +39,9 @@ public class Calendario {
         System.out.println("Agendamentos para o dia " + dia + ":");
         for (Agendamento agendamento : agenda) {
             if (agendamento.getDia().equals(dia)) {
-                System.out.println("Médico: " + agendamento.getMedico().getNome() +
-                        ", Horário: " + agendamento.getHorario() +
+                System.out.println("Medico: " + agendamento.getMedico().getNome() +
+                        ", Horario: " + agendamento.getHorario() +
+                        ", Valor: R$ " + agendamento.getValor() +
                         ", Paciente: " + agendamento.getPaciente().getNome());
             }
         }
@@ -54,13 +55,15 @@ public class Calendario {
         private Medico medico;
         private String dia;
         private String horario;
+        private double valor;
         private Paciente paciente;
 
-        public Agendamento(Medico medico, String dia, String horario, Paciente paciente) {
+        public Agendamento(Medico medico, String dia, String horario, double valor, Paciente paciente2) {
             this.medico = medico;
             this.dia = dia;
             this.horario = horario;
-            this.paciente = paciente;
+            this.valor = valor;
+            this.paciente = paciente2;
         }
 
         public Medico getMedico() {
@@ -73,6 +76,10 @@ public class Calendario {
 
         public String getHorario() {
             return horario;
+        }
+
+        public double getValor(){
+            return valor;
         }
 
         public Paciente getPaciente() {

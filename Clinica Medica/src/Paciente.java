@@ -1,4 +1,6 @@
-public class Paciente extends Pessoa {
+import java.io.Serializable;
+
+public class Paciente extends Pessoa implements Serializable{
     private String convenio;
 
     public Paciente(String nome, String dataNascimento, int idade, String cpf, String rg, String endereco, String telefone, char sexo, String convenio) {
@@ -11,6 +13,12 @@ public class Paciente extends Pessoa {
     }
 
     public void setConvenio(String convenio) {
-        this.convenio = convenio;
+         if (convenio != null && !convenio.isEmpty()) {
+             this.convenio = convenio;
+        }
+        else{
+            this.convenio = null;
+        }
+       
     }
 }
